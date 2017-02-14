@@ -1,0 +1,112 @@
+<html><head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="/static/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <link href="/static/customstyle.css" rel="stylesheet" type="text/css">
+        <link href="/static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+        {% block page_scripts %}
+        {% endblock %}
+    </head>
+        
+        
+        
+    <body onload="load()" background="/static/bkg.jpg">
+        <div class="navbar navbar-default navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">路由器管理</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">Contacts</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row flowing">
+                    <div class="col-md-8 col-md-offset-0">
+                        <ul class="nav nav-pills">
+                            <li id="btn_status" class="{{s_status}}">
+                                <a href="{{l_status}}">运行状态</a>
+                            </li>
+                            <li id="btn_hotpoint" class="{{s_hotpoint}}">
+                                <a href="{{l_hotpoint}}">无线接入点</a>
+                            </li>
+                            <li class="{{s_port}}" id="port">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">网络参数设置</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li id="btn_wanport" class="{{s_wanport}}">
+                                        <a href="{{l_wanport}}">WAN口设置</a>
+                                    </li>
+                                    <li id="btn_lanport" class="{{s_lanport}}">
+                                        <a href="{{l_lanport}}">LAN口设置</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="{{s_dhcp}}" id="dpd_dhcp">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">DHCP服务器</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li id="btn_dhcps" class="{{s_dhcps}}">
+                                        <a href="{{l_dhcps}}">DHCP服务</a>
+                                    </li>
+                                    <li id="btn_clist" class="{{s_clist}}">
+                                        <a href="{{l_clist}}">客户端列表</a>
+                                    </li>
+                                    <li id="btn_staticip" class="{{s_staticip}}">
+                                        <a href="{{l_staticip}}">静态地址分配</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="{{s_sysopt}}" id="dpd_sysopt">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" contenteditable="true">系统设置</a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li id="btn_sysrestart" class="{{s_sysrestart}}">
+                                        <a href="{{l_sysrestart}}" contenteditable="true">重新启动</a>
+                                    </li>
+                                    <li id="btn_chpwd" class="{{s_chpwd}}">
+                                        <a href="{{l_chpwd}}" contenteditable="true">修改管理密码</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 page_con">
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">Library</a>
+                            </li>
+                            <li class="active">Data</li>
+                        </ul>
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+</body></html>

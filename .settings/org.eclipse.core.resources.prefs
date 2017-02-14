@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//app/Hotpoint.py=utf-8
+encoding//app/Index.py=utf-8
+encoding//app/Lanport.py=utf-8
+encoding//app/RouterLogin.py=utf-8
+encoding//app/Status.py=utf-8
+encoding//app/Wanport.py=utf-8
+encoding//helper/FormHelper.py=utf-8
+encoding//helper/InterfaceHelper.py=utf-8
+encoding//helper/ItemGenerator.py=utf-8
+encoding//helper/SysConfigHelper.py=utf-8
+encoding/config.py=utf-8

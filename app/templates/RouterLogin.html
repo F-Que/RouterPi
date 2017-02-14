@@ -1,0 +1,62 @@
+<html><head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="/static/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <link href="/static/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="/static/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    </head><body>
+    <div class="cover">
+      <div class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"><span>我的路由器</span></a>
+          </div>
+          <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active">
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#">Contacts</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="cover-image"></div>
+      <div class="container">
+        <div class="row">
+          <div class="jumbotron">
+            <h1>路由器管理登录</h1>
+            <p>从这里登录以管理路由器的各项功能</p>
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <form class="form-horizontal text-left" role="form" id="form_login" method = "POST">
+                  <div class="form-group">
+                    <div class="col-md-4">
+                      <input type="password" class="form-control input-lg" name="input_pwd" placeholder="路由器管理密码">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-12 text-left">
+                      <button type="submit" class="btn btn-success btn-lg">登录</button>
+                      <span class="text-danger">{{errs}}</span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+</body></html>
