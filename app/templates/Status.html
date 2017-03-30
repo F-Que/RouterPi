@@ -1,120 +1,122 @@
+
 {% extends "Title.html" %}
 {% block page_scripts %}
 {% endblock %}
-{% block content %}
-        <div class="row">
-          <div class="col-md-12">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>版本信息</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Respbian版本</td>
-                  <td>{{rpiver}}</td>
-                </tr>
-                <tr>
-                  <td>应用软件版本</td>
-                  <td>{{appver}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <hr>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>无线状态</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>SSID</td>
-                  <td>{{ssid}}</td>
-                </tr>
-                <tr>
-                  <td>信道</td>
-                  <td>{{channel}}</td>
-                </tr>
-                <tr>
-                  <td>SSID广播</td>
-                  <td>{{ssid_bc}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <hr>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>WAN端口状态</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Mac</td>
-                  <td>{{w_mac}}</td>
-                </tr>
-                <tr>
-                  <td>IP</td>
-                  <td>{{w_ip}}</td>
-                </tr>
-                <tr>
-                  <td>子网掩码</td>
-                  <td>{{w_mask}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <hr>
-          </div>
-        </div>
-          <div class="row">
-            <div class="col-md-12">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>LAN端口状态</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Mac</td>
-                    <td>{{l_mac}}</td>
-                  </tr>
-                  <tr>
-                    <td>IP</td>
-                    <td>{{l_ip}}</td>
-                  </tr>
-                  <tr>
-                    <td>子网掩码</td>
-                    <td>{{l_mask}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+{% block
+content %}
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>版本信息</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Respbian版本</td>
+					<td>{{rpiver}}</td>
+				</tr>
+				<tr>
+					<td>应用软件版本</td>
+					<td>{{appver}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 text-center">
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>无线状态</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>SSID</td>
+					<td>{{ssid}}</td>
+				</tr>
+				<tr>
+					<td>信道</td>
+					<td>{{channel}}</td>
+				</tr>
+				<tr>
+					<td>SSID广播</td>
+					<td>{{ssid_bc}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>WAN端口状态</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Mac</td>
+					<td>{{w_mac}}</td>
+				</tr>
+				<tr>
+					<td>IP</td>
+					<td>{{w_ip}}</td>
+				</tr>
+				<tr>
+					<td>子网掩码</td>
+					<td>{{w_mask}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<hr>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>LAN端口状态</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Mac</td>
+					<td>{{l_mac}}</td>
+				</tr>
+				<tr>
+					<td>IP</td>
+					<td>{{l_ip}}</td>
+				</tr>
+				<tr>
+					<td>子网掩码</td>
+					<td>{{l_mask}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
 {% endblock %}

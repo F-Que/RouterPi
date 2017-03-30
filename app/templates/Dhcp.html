@@ -1,0 +1,95 @@
+{% extends "Title.html" %}
+{% block page_scripts %}
+<script language="javascript">
+	function Tab(ckb){
+		//alert("Tab"+ ckb.name);
+		div1 = document.getElementById("div1");
+		if(ckb.checked){
+			//alert("block " + div1.id);
+			div1.style.display = "block";
+		}
+		else{
+			//alert("hide " + div1.id);
+			div1.style.display = "none";
+		}
+	}
+	
+	function load(){
+		alert("load");
+		var ckb = document.getElementById("ckb_dhcp_on");
+		alert("tab");
+		Tab(ckb);
+	}
+</script>
+{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" name="ckb_dhcp_on" id="ckb_dhcp_on" onclick="Tab(this)" {{dhcp_on}}>启用DHCP服务
+						</label>
+					</div>
+				</div>
+			</div>
+			<div id="div1">
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label class="control-label">地址池起始地址</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="input_pool_start"
+							value="{{pool_start}}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label class="control-label">地址池结束地址</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="input_pool_end"
+							value="{{pool_end}}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label class="control-label">自动释放时间</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="input_autolease"
+							value="{{auto_lease}}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label class="control-label">首选DNS服务器</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="input_dns1"
+							value="{{dns1}}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label class="control-label">备用DNS服务器</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="input_dns2"
+							value="{{dns2}}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-success">保存修改</button>
+						<span class="text-danger">{{errs}}</span>
+						<span class="text-success">{{sucs}}</span>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock %}          
