@@ -1,11 +1,11 @@
+#coding:utf-8
 '''
 Created on Mar 27, 2017
-
 @author: que
 '''
 
 from app import app
-from helper import ItemGenerator
+from helper import ItemGenerator, SysConfigHelper
 from helper import FormHelper
 from flask.templating import render_template
 from flask.globals import request
@@ -17,8 +17,17 @@ def dhcp():
     errs = ''
     sucs = ''
     forms =  FormHelper.getForm()
+    
     if request.method == 'POST':
-        forms['dhcp'] = request.form.to_dict();
+        errs = SysConfigHelper.setDhcp(forms)
+        if errs == '':
+            if request.form.has_key('ckb_dhcp_on'):
+                forms['dhcp'] = request.form.to_dict()
+            elif forms['dhcp'].has_key('ckb_dhcp_on'):
+                forms['dhcp'].pop('ckb_dhcp_on')
+            sucs = u'保存成功，请等待服务重启'
+        FormHelper.setForm(forms)
+        
     return render_template('Dhcp.html', 
                             s_status = ls['status'][0],
                             l_status = ls['status'][1],
@@ -43,7 +52,7 @@ def dhcp():
                             l_chpwd = ls['chpwd'][1],
                             pool_start = forms['dhcp'].get('input_pool_start'),
                             pool_end = forms['dhcp'].get('input_pool_end'),
-                            auto_lease = forms['dhcp'].get('auto_lease'),
+                            auto_lease = forms['dhcp'].get('input_auto_lease'),
                             dns1 =  forms['dhcp'].get('input_dns1'),
                             dns2 =  forms['dhcp'].get('input_dns2'),
                             sucs = sucs,

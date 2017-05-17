@@ -15,9 +15,9 @@
 	}
 	
 	function load(){
-		alert("load");
+		//alert("load");
 		var ckb = document.getElementById("ckb_dhcp_on");
-		alert("tab");
+		//alert("tab");
 		Tab(ckb);
 	}
 </script>
@@ -25,7 +25,7 @@
 {% block content %}
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" role="form">
+		<form class="form-horizontal" role="form" method="POST">
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<div class="checkbox">
@@ -59,7 +59,7 @@
 						<label class="control-label">自动释放时间</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="input_autolease"
+						<input type="text" class="form-control" name="input_auto_lease"
 							value="{{auto_lease}}">
 					</div>
 				</div>

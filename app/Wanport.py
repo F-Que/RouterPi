@@ -3,16 +3,18 @@
 Created on 2017年2月12日
 
 @author: f-que
-'''
+'''                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 from app import app 
 from flask.templating import render_template
-from helper import ItemGenerator, FormHelper, InterfaceHelper
+from helper import ItemGenerator, FormHelper, InterfaceHelper, SysConfigHelper
 from flask.globals import request
 
 
 
 @app.route('/wanport', methods = ['POST', 'GET'])
 def wanport():
+    errs = ''
+    sucs = ''
     ls = ItemGenerator.genTitle('wanport')
     forms = FormHelper.getForm();
     iface = InterfaceHelper.getNetworkInterFaces('eth0')
@@ -23,10 +25,13 @@ def wanport():
                 tmp['input_dns1'] = InterfaceHelper.getGateway()
             if tmp['input_dns2'] == '':
                 tmp['input_dns2'] = '0.0.0.0'
-        for k in tmp:
-            forms['wanport'][k] = tmp[k]           
-        FormHelper.setForm(forms)
-        
+        errs = SysConfigHelper.setWan(forms)
+        if errs == '':        
+            for k in tmp:
+                forms['wanport'][k] = tmp[k]           
+            sucs = u'保存成功，请等待服务重启'
+            FormHelper.setForm(forms)
+
     return render_template("Wanport.html", 
                             s_status = ls['status'][0],
                             l_status = ls['status'][1],
@@ -50,16 +55,14 @@ def wanport():
                             s_chpwd = ls['chpwd'][0],
                             l_chpwd = ls['chpwd'][1],
                             default_page = forms['wanport']['current_page'],
-                            wan_ipd = iface['ip'],
-                            maskd = iface['mask'],
-                            gatewayd = InterfaceHelper.getGateway(),
+                            wan_ip = iface['ip'],
+                            mask = iface['mask'],
+                            gateway = InterfaceHelper.getGateway(),
                             dns1 = forms['wanport']['input_dns1'],
                             dns2 = forms['wanport']['input_dns2'],
-                            wan_ips = forms['wanport']['input_ips'],
-                            masks = forms['wanport']['input_masks'],
-                            gateways = forms['wanport']['input_gateways'],
                             pppname = 'username',
                             ppppwd = 'password',
-                            ppp_connected = 'true'
-                            )
+                            ppp_connected = 'true',
+                            sucs = sucs,
+                            errs =errs)
 

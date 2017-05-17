@@ -10,3 +10,4 @@ from app import Lanport
 from app import Hotpoint
 from app import Wanport
 from app import Dhcp
+from app import Clist

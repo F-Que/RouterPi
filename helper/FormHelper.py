@@ -6,10 +6,10 @@ Created on 2017年2月6日
 '''
 import json
 form_prest = {
-    'lanport': {'input_ip': '192.168.0.1', 'imput_mask': '255.255.255.0'},
+    'lanport': {'input_ip': '192.168.0.1', 'input_mask': '255.255.255.0'},
     'hotpoint':{'input_ssid': 'RaspberryPi', 'sel_channel': 's1'},
-    'wanport': {'input_ips': '', 'input_masks': '', 'input_dns2': '4.4.4.4', 'current_page': '0', 'input_dns1': '8.8.8.8', 'input_gateways': '', 'input_ppppwd': 'password', 'input_pppname': 'pppname'},
-    'dhcp': {}
+    'wanport': {'input_ip': '', 'input_mask': '', 'input_dns2': '4.4.4.4', 'current_page': '0', 'input_dns1': '8.8.8.8', 'input_gateway': '', 'input_ppppwd': 'password', 'input_pppname': 'pppname'},
+    'dhcp': {"ckb_dhcp_on": "on","input_pool_end": "192.168.2.200","input_dns2": "4.4.4.4","input_dns1": "8.8.8.8","input_auto_lease": "7200","input_pool_start": "192.168.2.10"}
 } 
 
 def setForm(forms):

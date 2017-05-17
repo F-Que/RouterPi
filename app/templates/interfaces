@@ -1,0 +1,10 @@
+auto lo
+iface lo inet loopback
+iface eth0 inet manual
+
+allow-hotplug wlan0
+iface wlan0 inet static
+address {{lan_ip}}
+netmask {{mask}}
+
+up iptables-restore < /etc/iptables.ipv4.nat

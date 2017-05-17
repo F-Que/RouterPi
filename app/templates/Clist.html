@@ -1,0 +1,36 @@
+
+{% extends "Title.html" %}
+{% block page_scripts %}	
+	function
+{% endblock %}
+{% block
+content %}
+<div class="row">
+	<div class="col-md-12">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>客户端名</th>
+					<th>MAC地址</th>
+					<th>IP地址</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for client in client_list %}
+				<tr>
+					<td>{{client.hostname}}</td>
+					<td>{{client.ethernet}}</td>
+					<td>{{client.ip}}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<a class="btn btn-primary" href="javascript:location.reload();">刷新</a>
+		
+	</div>
+</div>
+{% endblock %}

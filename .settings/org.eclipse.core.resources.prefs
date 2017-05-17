@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//app/Clist.py=utf-8
+encoding//app/Dhcp.py=utf-8
 encoding//app/Hotpoint.py=utf-8
 encoding//app/Index.py=utf-8
 encoding//app/Lanport.py=utf-8
