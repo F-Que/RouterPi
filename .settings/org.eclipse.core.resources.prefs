@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//app/Chpwd.py=utf-8
 encoding//app/Clist.py=utf-8
 encoding//app/Dhcp.py=utf-8
 encoding//app/Hotpoint.py=utf-8
@@ -6,6 +7,7 @@ encoding//app/Index.py=utf-8
 encoding//app/Lanport.py=utf-8
 encoding//app/RouterLogin.py=utf-8
 encoding//app/Status.py=utf-8
+encoding//app/Sysrestart.py=utf-8
 encoding//app/Wanport.py=utf-8
 encoding//helper/FormHelper.py=utf-8
 encoding//helper/InterfaceHelper.py=utf-8

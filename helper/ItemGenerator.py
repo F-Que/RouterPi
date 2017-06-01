@@ -14,9 +14,9 @@ def genTitle(addr):
             'lanport' : ['', '/lanport'],
             'dhcps' : ['', '/dhcp'], 
             'clist' : ['', '/clist'],
-            'staticip' : ['', '/staticip'],
-            'sysrestart' : ['', 'sysrestart'],
-            'chpwd' : ['', 'chpwd'], 
+            'staticip' : ['', ''],
+            'sysrestart' : ['', '/sysrestart'],
+            'chpwd' : ['', '/chpwd'], 
             'port' : '',
             'dhcp' : '',
             'sysopt' : ''
@@ -29,7 +29,7 @@ def genTitle(addr):
     elif addr in ['dhcps', 'clist', 'staticip']:
         list1['dhcp'] = 'active dropdown'
     elif addr in ['sysrestart', 'chpwd']:
-        list['sysopt'] = 'active dropdown'
+        list1['sysopt'] = 'active dropdown'
     return list1
 
 

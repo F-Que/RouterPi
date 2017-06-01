@@ -1,31 +1,120 @@
 {% extends "Title.html" %}
 {% block page_scripts %}
 <script language="javascript">
-	function Tab(ckb){
-		//alert("Tab"+ ckb.name);
-		div1 = document.getElementById("div1");
-		if(ckb.checked){
-			//alert("block " + div1.id);
-			div1.style.display = "block";
-		}
-		else{
-			//alert("hide " + div1.id);
-			div1.style.display = "none";
-		}
+function resetMsg(){
+	sucs =  document.getElementById("sucs");
+	sucs.innerText = "";
+	//errs =  document.getElementById("errs");
+	//errs.innerText = "";
+} 
+
+function Tab(ckb){
+	resetMsg();
+	//alert("Tab"+ ckb.name);
+	div1 = document.getElementById("div1");
+	if(ckb.checked){
+		//alert("block " + div1.id);
+		div1.style.display = "block";
 	}
+	else{
+		//alert("hide " + div1.id);
+		div1.style.display = "none";
+	}
+}
 	
-	function load(){
-		//alert("load");
-		var ckb = document.getElementById("ckb_dhcp_on");
-		//alert("tab");
-		Tab(ckb);
+function load(){
+	//alert("load");
+	var ckb = document.getElementById("ckb_dhcp_on");
+	//alert("tab");
+	Tab(ckb);
+}
+
+String.prototype.trim = function(){
+  return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
+
+function isEmpty(field){
+	str = field.value.trim();
+	if(str == ""){
+		return true;
 	}
+	return false;
+}
+	
+function validateIP(field){
+	//alert("checkvalidateIP");
+    regExp =/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+    if (field.value.match(regExp)) 
+        return true;
+    return false;
+}
+
+function validateForm(frm){
+	var str = "";
+	//alert("validateForm");
+	errs =  document.getElementById("errs");
+	//alert(errs.innerText);
+    with(frm) {
+    	if(isEmpty(input_pool_start)){
+    		errs.innerText = "此项不可为空";
+            //alert("err");
+            input_pool_start.focus();
+            return false;
+    	}
+    	
+    	if(isEmpty(input_pool_end)){
+    		errs.innerText = "此项不可为空";
+            //alert("err");
+            input_pool_end.focus();
+            return false;
+    	}
+    	
+    	if(isEmpty(input_auto_lease)){
+    		errs.innerText = "此项不可为空";
+            //alert("err");
+            input_auto_lease.focus();
+            return false;
+    	}
+        if(!validateIP(input_pool_start)){
+            errs.innerText = "IP格式错误";
+            //alert("err");
+            input_pool_start.focus();
+            return false;
+        }
+        if(!validateIP(input_pool_end)) {
+        	errs.innerText = "IP格式错误";
+        	//alert("err");
+            input_pool_end.focus();
+            return false;
+        } 
+        str = input_dns1.value.trim();
+        if(str != ""){
+        	if(!validateIP(input_dns1)) {
+        		errs.innerText = "IP格式错误";
+        		//alert("err");
+            	input_dns1.focus();
+				return false;
+            }
+        }
+        
+        str = input_dns2.value.trim();
+        if(str != ""){
+        	if(!validateIP(input_dns2)) {
+        		errs.innerText = "IP格式错误";
+        		//alert("err");
+           		input_dns2.focus();
+            	return false;
+            }
+        }
+    }
+    return true;
+}
 </script>
 {% endblock %}
 {% block content %}
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" role="form" method="POST">
+		<form class="form-horizontal" role="form" method="POST" onSubmit="return validateForm(this);">
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<div class="checkbox">
@@ -41,7 +130,7 @@
 						<label class="control-label">地址池起始地址</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="input_pool_start"
+						<input type="text" class="form-control" name="input_pool_start" id="input_pool_start"
 							value="{{pool_start}}">
 					</div>
 				</div>
@@ -50,7 +139,7 @@
 						<label class="control-label">地址池结束地址</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="input_pool_end"
+						<input type="text" class="form-control" name="input_pool_end" id="input_pool_end"
 							value="{{pool_end}}">
 					</div>
 				</div>
@@ -59,7 +148,7 @@
 						<label class="control-label">自动释放时间</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="input_auto_lease"
+						<input type="number" class="form-control" name="input_auto_lease" id="input_auto_lease"
 							value="{{auto_lease}}">
 					</div>
 				</div>
@@ -68,7 +157,7 @@
 						<label class="control-label">首选DNS服务器</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="input_dns1"
+						<input type="text" class="form-control" name="input_dns1" id="input_dns1"
 							value="{{dns1}}">
 					</div>
 				</div>
@@ -77,15 +166,15 @@
 						<label class="control-label">备用DNS服务器</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="input_dns2"
+						<input type="text" class="form-control" name="input_dns2" id="input_dns2"
 							value="{{dns2}}">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-success">保存修改</button>
-						<span class="text-danger">{{errs}}</span>
-						<span class="text-success">{{sucs}}</span>
+						<button type="submit" class="btn btn-success" onClick="resetMsg();">保存修改</button>
+						<span class="text-danger" id="errs">{{errs}}</span>
+						<span class="text-success" id="sucs">{{sucs}}</span>
 					</div>
 				</div>
 			</div>

@@ -4,7 +4,6 @@ Created on 2017年2月14日
 
 @author: f-que
 '''
-import os
 import IPy
 import InterfaceHelper
 
@@ -25,18 +24,20 @@ def setHostapd(forms):
                           boardcast = boardcast)
     
     try:
-        with open('hostapd.conf', 'w') as fp:
+        with open('/etc/hostapd/hostapd.conf', 'w') as fp:
             fp.write(s)
             fp.close()
     except Exception, e:
         return u'保存配置文件失败\n' + e
-    #os.system('service hostapd restart')
     return ''
         
 def setDhcp(forms):
     form = forms['dhcp']
     iface = InterfaceHelper.getNetworkInterFaces('wlan0')
-    subnet = IPy.IP(iface['ip']).make_net(iface['mask']).strNormal(0)
+    try:
+        subnet = IPy.IP(iface['ip']).make_net(iface['mask']).strNormal(0)
+    except:
+        return u'Lan端口配置错误\n'
         
     s = render_template('dhcpd.conf',
                         auto_lease = form['input_auto_lease'],
@@ -51,32 +52,27 @@ def setDhcp(forms):
                         )
     
     try:
-        with open('dhcpd.conf', 'w') as fp:
+        with open('/etc/dhcp/dhcpd.conf', 'w') as fp:
             fp.write(s)
             fp.close()
     except Exception, e:
         return u'保存配置文件失败\n' + e
     
-    if form.has_key('ckb_dhcp_on'):
-        print "os.system('service dhcpd restart')"
-    else:
-        print "os.system('service dhcpd stop')"
     return ''
     
 def setLan(forms):
     form =  forms['lanport']
     s = render_template('interfaces',
                         lan_ip = form['input_ip'],
-                        maks = form['input_mask'])
+                        mask = form['input_mask'])
     
     try:
-        with open('interface', 'w') as fp:
+        with open('/etc/network/interfaces', 'w') as fp:
             fp.write(s)
             fp.close()
     except Exception, e:
         return u'保存配置文件失败\n' + e
     
-    print "os.system('service dhcpcd restart')"
     return ''
 
 def setWan(forms):
@@ -99,10 +95,9 @@ def setWan(forms):
         except Exception, e:  
             return u'保存配置文件失败\n' + e
     
-        print "os.system('service dhcpcd restart')"
         return '' 
     
     else:
-        return u'ppp设置\n'
+        return ''
             
     

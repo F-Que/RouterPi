@@ -25,10 +25,10 @@ def wanport():
                 tmp['input_dns1'] = InterfaceHelper.getGateway()
             if tmp['input_dns2'] == '':
                 tmp['input_dns2'] = '0.0.0.0'
+        for k in tmp:
+            forms['wanport'][k] = tmp[k]
         errs = SysConfigHelper.setWan(forms)
-        if errs == '':        
-            for k in tmp:
-                forms['wanport'][k] = tmp[k]           
+        if errs == '':                  
             sucs = u'保存成功，请等待服务重启'
             FormHelper.setForm(forms)
 

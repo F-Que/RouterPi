@@ -1,0 +1,24 @@
+{% extends "Title.html" %}
+{% block page_scripts %}
+<script language="javascript">
+	function res(){
+	sucs =  document.getElementById("sucs");
+	sucs.innerText = "重新启动中..."
+} 
+</script>	
+{% endblock %}
+{% block content %}
+<div class="row">
+          <div class="col-md-12">
+            <form class="form-horizontal" role="form"  method='POST'>
+
+              <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-12">
+                  <button type="submit" class="btn btn-success" onClick = "res();">重新启动</button>
+                  <span class="text-success" id="sucs"></span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+{% endblock %}

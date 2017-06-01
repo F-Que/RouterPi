@@ -11,3 +11,5 @@ from app import Hotpoint
 from app import Wanport
 from app import Dhcp
 from app import Clist
+from app import Chpwd
+from app import Sysrestart

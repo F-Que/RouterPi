@@ -9,22 +9,39 @@ import subprocess
 import re
 
 def getNetworkInterFaces(iface):
-    '''ifconfig = subprocess.Popen("ifconfig" + iface, stdout = subprocess.PIPE)
-    output = ifconfig.stdout.read()
+    try:
+        ifconfig = subprocess.Popen("ifconfig" + iface, stdout = subprocess.PIPE)
+        output = ifconfig.stdout.read()
+    except:
+        output = ''
+        
     ipstr = '([0-9]{1,3}\.){3}[0-9]{1,3}'
     mask_pattern = re.compile('(Mask:%s)' % ipstr)
     ip_pattern = re.compile('(inet addr:%s)' % ipstr)
     bcast_pattern = re.compile('(Bcast:%s)' % ipstr)
     mac_pattern = re.compile('([0-9a-f]{1,2}[:]){5}([0-9a-f]{1,2})')
     pattern = re.compile(ipstr)
-    ip = re.search(pattern,re.search(ip_pattern, output).group()).group()
-    mask = re.search(pattern,re.search(mask_pattern, output).group()).group()
-    bcast = re.search(pattern,re.search(bcast_pattern, output).group()).group()
-    mac = re.search(mac_pattern, output).group()'''
-    ip = '192.168.2.1'
-    mac = '3c:46:d8:08:d6:dc'
-    bcast = '192.168.2.255'
-    mask = '255.255.255.0'
+    try:
+        ip = re.search(pattern,re.search(ip_pattern, output).group()).group()
+    except:
+        ip = None
+    
+    try:    
+        mask = re.search(pattern,re.search(mask_pattern, output).group()).group()
+    except:
+        mask = None
+    try:
+        bcast = re.search(pattern,re.search(bcast_pattern, output).group()).group()
+    except:
+        bcast = None
+    try:
+        mac = re.search(mac_pattern, output).group()
+    except:
+        mac = None
+    #ip = '192.168.2.1'
+    #mac = '3c:46:d8:08:d6:dc'
+    #bcast = '192.168.2.255'
+    #mask = '255.255.255.0'
     return {'ip': ip, 'mac': mac, 'mask': mask, 'bcast': bcast}
 
 def getGateway():
@@ -33,7 +50,10 @@ def getGateway():
     output = p.stdout.read()
     ipstr = '([0-9]{1,3}\.){3}[0-9]{1,3}'
     gateway_patten = re.compile(ipstr)
-    gateway = re.search(gateway_patten, output).group()
+    try:
+        gateway = re.search(gateway_patten, output).group()
+    except:
+        gateway = None
     return gateway
 
 def getDns():

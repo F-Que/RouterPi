@@ -1,12 +1,80 @@
-
 {% extends "Title.html" %}
 {% block page_scripts %}
+<script language="javascript">
+function resetMsg(){
+	sucs =  document.getElementById("sucs");
+	sucs.innerText = "";
+	//errs =  document.getElementById("errs");
+	//errs.innerText = "";
+} 
+function load(){
+	//alert("load");
+	return true;
+}
+	
+String.prototype.trim = function(){
+  	return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+}
+
+function isEmpty(field){
+	str = field.value.trim();
+	if(str == ""){
+		return true;
+	}
+	return false;
+}
+	
+function validateIP(field){
+	//alert("checkIP");
+    regExp =/^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/;
+    if (field.value.match(regExp)) 
+        return true;
+    return false;
+}
+
+
+function validateForm(frm){
+	var str = "";
+	//alert("validateForm");
+	errs =  document.getElementById("errs");
+	//alert(errs.innerText);
+    with(frm) {
+    	if(isEmpty(input_ip)){
+    		errs.innerText = "此项不可为空";
+            //alert("err");
+            input_ip.focus();
+            return false;
+    	}
+    	
+    	if(isEmpty(input_mask)){
+    		errs.innerText = "此项不可为空";
+            //alert("err");
+            input_mask.focus();
+            return false;
+    	}
+
+        if(!validateIP(input_ip)){
+            errs.innerText = "IP格式错误";
+            //alert("err");
+            input_ip.focus();
+            return false;
+        }
+        if(!validateIP(input_ip)) {
+        	errs.innerText = "IP格式错误";
+        	//alert("err");
+            input_ip.focus();
+            return false;
+        } 
+    }
+    return true;
+}
+</script>
 {% endblock %}
 {% block
 content %}
 <div class="row">
 	<div class="col-md-12">
-		<form class="form-horizontal" role="form" method='POST'>
+		<form class="form-horizontal" role="form" method='POST' onSubmit="return validateForm(this);">
 			<div class="form-group">
 				<div class="col-sm-2">
 					<label class="control-label">Mac地址</label>
@@ -21,7 +89,7 @@ content %}
 					<label class="control-label">IP地址</label>
 				</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="input_ip"
+					<input type="text" class="form-control" name="input_ip" id="input_ip"
 						value="{{ip}}">
 				</div>
 			</div>
@@ -30,15 +98,15 @@ content %}
 					<label class="control-label">子网掩码</label>
 				</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="input_mask"
+					<input type="text" class="form-control" name="input_mask" id="input_mask"
 						value="{{mask}}">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-success">保存修改</button>
-					<span class="text-danger">{{errs}}</span>
-					<span class="text-success">{{sucs}}</span>
+					<button type="submit" class="btn btn-success" onClick="resetMsg();">保存修改</button>
+					<span class="text-danger" id="errs">{{errs}}</span>
+					<span class="text-success" id="sucs">{{sucs}}</span>
 				</div>
 			</div>
 		</form>

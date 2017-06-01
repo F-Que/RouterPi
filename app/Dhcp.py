@@ -13,12 +13,12 @@ from flask.globals import request
 
 @app.route('/dhcp', methods = ['POST', 'GET'])
 def dhcp():
-    ls = ItemGenerator.genTitle('dhcp')
+    ls = ItemGenerator.genTitle('dhcps')
     errs = ''
     sucs = ''
     forms =  FormHelper.getForm()
-    
     if request.method == 'POST':
+        forms['dhcp'] = request.form.to_dict()
         errs = SysConfigHelper.setDhcp(forms)
         if errs == '':
             if request.form.has_key('ckb_dhcp_on'):
@@ -26,7 +26,7 @@ def dhcp():
             elif forms['dhcp'].has_key('ckb_dhcp_on'):
                 forms['dhcp'].pop('ckb_dhcp_on')
             sucs = u'保存成功，请等待服务重启'
-        FormHelper.setForm(forms)
+            FormHelper.setForm(forms)
         
     return render_template('Dhcp.html', 
                             s_status = ls['status'][0],
